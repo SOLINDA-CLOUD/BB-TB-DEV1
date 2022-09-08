@@ -6,7 +6,7 @@ class ProductProduct(models.Model):
     order_notes = fields.Html(string='Order Notes')
     collection_product = fields.Many2one('product.collections', string='Collection')
     launch_date = fields.Date(string='Launch Date')
-    default_code = fields.Char(string='Internal Reference', related='product.template.default_code')
+    default_code = fields.Char(string='Internal Reference', related='product_tmpl_id.default_code')
 
 class ProductCollections(models.Model):
     _name = 'product.collections'
