@@ -1,7 +1,18 @@
 from odoo import fields, models, api, models
+from odoo.exceptions import ValidationError
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
+
+    @api.constrains('default_code')
+    def _check_code_unique(self):
+        if self.default_code:
+            ref_counts = self.search_count(
+                [('default_code', '=', self.default_code), ('id', '!=', self.id)])
+            if ref_counts > 0:
+                raise ValidationError("Internal Reference already exists!")
+        else:
+            return
 
     class_product = fields.Selection([('normal', 'Normal'),('sale','Sale')], string='Class')
     brand = fields.Many2one('product.brand', string='Brand')
