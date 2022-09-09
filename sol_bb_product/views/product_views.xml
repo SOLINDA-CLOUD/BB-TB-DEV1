@@ -14,5 +14,19 @@
         </xpath>
       </field>
     </record>
+
+    <record id="barcode_optional_inherit_product" model="ir.ui.view">
+      <field name="name">barcode.optional.inherit.product</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_product_tree_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='default_code']" position="replace">
+          <field name="default_code" readonly="1"/>
+        </xpath>
+        <xpath expr="//field[@name='barcode']" position="replace">
+          <field name="barcode" readonly="1"/>
+        </xpath>
+      </field>
+    </record>
   </data>
 </odoo>
