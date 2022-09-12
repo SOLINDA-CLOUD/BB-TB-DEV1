@@ -14,7 +14,6 @@ class ProductTemplate(models.Model):
         else:
             return
 
-    class_product = fields.Selection([('normal', 'Normal'),('sale','Sale')], string='Class')
     brand = fields.Many2one('product.brand', string='Brand')
     stock_type = fields.Many2one('stock.type', string='Stock Type')
 
