@@ -246,6 +246,22 @@ class MrpProductionRequest(models.Model):
         comodel_name="stock.warehouse.orderpoint", string="Orderpoint"
     )
 
+    # Notes
+    label_placement = fields.Char(string='Label Placement')
+    hanger_tape = fields.Char(string='Hanger Tape')
+    seams = fields.Char(string='Seams')
+    hem = fields.Char(string='Hem')
+    zip_position = fields.Char(string='Zip Position')
+    button_position = fields.Char(string='Button Position')
+    mesh_tape = fields.Char(string='Mesh Tape')
+    facing = fields.Char(string='Facing')
+    special_trim = fields.Char(string='Special Trim')
+    fabric_qty = fields.Integer(string='Fabric Qty')
+    consumptions = fields.Char(string='Consumptions')
+    cutting_time = fields.Date(string='Cutting Time')
+    make_time = fields.Date(string='Make Time')
+    make_cost = fields.Float(string='Make Cost')
+    
     _sql_constraints = [
         (
             "name_uniq",

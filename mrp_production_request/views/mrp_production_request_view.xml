@@ -67,6 +67,24 @@
                                 </group>
                             </group>
                         </page>
+                        <page name="notes" string="Notes">
+                            <group>
+                                <field name="label_placement" />
+                                <field name="hanger_tape" />
+                                <field name="seams" />
+                                <field name="hem" />
+                                <field name="zip_position" />
+                                <field name="button_position" />
+                                <field name="mesh_tape" />
+                                <field name="facing" />
+                                <field name="special_trim" />
+                                <field name="fabric_qty" />
+                                <field name="consumptions" />
+                                <field name="cutting_time" />
+                                <field name="make_time" />
+                                <field name="make_cost" />
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
