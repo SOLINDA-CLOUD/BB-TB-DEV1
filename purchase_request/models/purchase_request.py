@@ -29,8 +29,9 @@ class PurchaseRequest(models.Model):
         return self.env["res.users"].browse(self.env.uid)
 
     @api.model
-    def _get_default_name(self):
-        return self.env["ir.sequence"].next_by_code("purchase.request")
+    def _get_default_name(self, vals):
+        vals['name'] = self.env["ir.sequence"].next_by_code("purchase.request.seq")
+        return super(PurchaseRequest, self).create(vals)
 
     @api.model
     def _default_picking_type(self):
@@ -55,8 +56,8 @@ class PurchaseRequest(models.Model):
 
     name = fields.Char(
         string="Transaction No",
-        # required=True,
-        default=lambda self: _("/"),
+        required=True,
+        default=lambda self: _("New"),
         tracking=True,
         readonly=True,
     )
