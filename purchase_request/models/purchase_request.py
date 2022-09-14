@@ -29,11 +29,6 @@ class PurchaseRequest(models.Model):
         return self.env["res.users"].browse(self.env.uid)
 
     @api.model
-    def _get_default_name(self, vals):
-        vals['name'] = self.env["ir.sequence"].next_by_code("purchase.request.seq")
-        return super(PurchaseRequest, self)._get_default_name(vals)
-
-    @api.model
     def _default_picking_type(self):
         type_obj = self.env["stock.picking.type"]
         company_id = self.env.context.get("company_id") or self.env.company.id
@@ -64,6 +59,12 @@ class PurchaseRequest(models.Model):
     is_name_editable = fields.Boolean(
         default=lambda self: self.env.user.has_group("base.group_no_one"),
     )
+    
+    @api.model
+    def _get_default_name(self, vals):
+        vals['name'] = self.env["ir.sequence"].next_by_code("purchase.request.seq")
+        return super(PurchaseRequest, self)._get_default_name(vals)
+    
     origin = fields.Char(string="Source Document")
     date_start = fields.Date(
         string="Creation date",

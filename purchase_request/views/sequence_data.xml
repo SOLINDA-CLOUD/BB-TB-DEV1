@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <data>
         <record id="purchase_request_seq" model="ir.sequence">
             <field name="name">Purchase Request Sequence</field>
@@ -9,7 +8,5 @@
             <field name="prefix">SDV/%(day)s/%(month)s%(y)s/</field>
         </record>
 
-
     </data>
-
 </odoo>
