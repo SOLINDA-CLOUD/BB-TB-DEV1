@@ -24,7 +24,6 @@ class PurchaseRequest(models.Model):
     sub_department = fields.Char(string='Sub Department')
     request_detail_id = fields.Many2one(string='Original Sample', comodel_name='request.detail', ondelete='cascade')
     notes = fields.Html(string='Fit Notes')
-    name = fields.Char(string="Transaction No")
     date_start = fields.Date(string='Transaction Date')
 
     @api.model

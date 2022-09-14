@@ -54,10 +54,11 @@ class PurchaseRequest(models.Model):
                 rec.is_editable = True
 
     name = fields.Char(
-        string="Request Reference",
-        required=True,
-        default=lambda self: _("New"),
+        string="Transaction No",
+        # required=True,
+        default=lambda self: _("/"),
         tracking=True,
+        readonly=True,
     )
     is_name_editable = fields.Boolean(
         default=lambda self: self.env.user.has_group("base.group_no_one"),
