@@ -26,6 +26,11 @@ class PurchaseRequest(models.Model):
     notes = fields.Html(string='Fit Notes')
     date_start = fields.Date(string='Transaction Date')
 
+    @api.model
+    def create(self, vals):
+        res = super(PurchaseRequest, self).create(vals)
+        res.name = self.env["ir.sequence"].next_by_code("purchase.request.seq")
+        return res
 
 class RequestDetail(models.Model):
     _name = 'request.detail'
