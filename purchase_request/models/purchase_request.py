@@ -31,7 +31,7 @@ class PurchaseRequest(models.Model):
     @api.model
     def _get_default_name(self, vals):
         vals['name'] = self.env["ir.sequence"].next_by_code("purchase.request.seq")
-        return super(PurchaseRequest, self).create(vals)
+        return super(PurchaseRequest, self)._get_default_name(vals)
 
     @api.model
     def _default_picking_type(self):
