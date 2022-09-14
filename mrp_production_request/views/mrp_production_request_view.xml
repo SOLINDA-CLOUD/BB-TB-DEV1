@@ -31,6 +31,11 @@
                             <field domain="[('bom_ids','!=',False),('bom_ids.type','!=','phantom')]" name="product_id" />
                             <field invisible="1" name="product_tmpl_id" />
                             <field domain="['&amp;', '|', ('product_id','=',product_id),'&amp;', ('product_tmpl_id.product_variant_ids','=',product_id),('product_id','=',False), ('type', '=', 'normal')]" name="bom_id" />
+                            <field name="trans_date" />
+                            <field name="department" />
+                            <field name="original_size_id" />
+                            <field name="image" widget="image" class="container"/>
+                            <field name="fit_notes" />
                         </group>
                         <group>
                             <field name="product_qty" />
@@ -39,14 +44,8 @@
                             <field name="pending_qty" />
                             <field groups="uom.group_uom" name="product_uom_id" />
                             <field invisible="1" name="category_uom_id" />
-                        </group>
-                    </group>
-                    <group>
-                        <group name="users">
                             <field name="requested_by" />
                             <field name="assigned_to" />
-                        </group>
-                        <group name="dates">
                             <field name="date_planned_start" />
                             <field name="date_planned_finished" />
                         </group>

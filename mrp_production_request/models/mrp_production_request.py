@@ -1,6 +1,7 @@
 # Copyright 2017-19 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from dataclasses import field
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -21,6 +22,14 @@ class MrpProductionRequest(models.Model):
         index=True,
         readonly=True,
     )
+
+    trans_date = fields.Datetime(
+        string='Transaction Date',
+        default=fields.Datetime.now,
+        index=True,
+        required=True,
+        states={"confirmed": [("readonly", False)]},
+        )
 
     @api.model
     def create(self, vals):
@@ -123,6 +132,21 @@ class MrpProductionRequest(models.Model):
         string="Product Template",
         related="product_id.product_tmpl_id",
     )
+    department = fields.Many2one('product.category', related='product_tmpl_id.categ_id', string='Department', store=True)
+
+    image = fields.Image(string='Fabric Swatch')
+
+    @api.onchange('product_id')
+    def _onchange_image(self):
+        if self.product_id:
+            self.image = ''
+            if self.product_id.image_1920:
+                self.image = self.product_id.image_1920
+            self.image = self.image
+
+    original_size_id = fields.Many2one('original.sample', string='Original Sample')
+
+    fit_notes = fields.Text(string='Fit Notes')
     product_qty = fields.Float(
         string="Required Quantity",
         required=False,
@@ -353,3 +377,12 @@ class MrpProductionRequest(models.Model):
             result["views"] = [(form and form.id or False, "form")]
             result["res_id"] = mos[0].id
         return result
+
+class OriginalSample(models.Model):
+    _name = 'original.sample'
+    _description = 'Original Sample'
+
+    name = fields.Char(string='Name')
+    sample_size = fields.Integer(string='Sample Size')
+    approved_size = fields.Integer(string='Sample is Approved Size')
+    make_size = fields.Integer(string='Please make Sample in Size')
