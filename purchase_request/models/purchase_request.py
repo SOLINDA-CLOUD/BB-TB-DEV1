@@ -54,9 +54,9 @@ class PurchaseRequest(models.Model):
                 rec.is_editable = True
 
     name = fields.Char(
-        string="Transaction No.",
-        required=True,
-        default=lambda self: _("New"),
+        string="Transaction No",
+        # required=True,
+        default=lambda self: _("/"),
         tracking=True,
         readonly=True,
     )
