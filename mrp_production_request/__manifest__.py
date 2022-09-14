@@ -24,5 +24,6 @@
         "views/mrp_production_request_view.xml",
         "views/product_template_view.xml",
         "views/mrp_production_view.xml",
+        "views/mrp_bom_line_views.xml",
     ],
 }
