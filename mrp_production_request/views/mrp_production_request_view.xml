@@ -30,7 +30,7 @@
                         <group>
                             <field domain="[('bom_ids','!=',False),('bom_ids.type','!=','phantom')]" name="product_id" />
                             <field invisible="1" name="product_tmpl_id" />
-                            <field name="bom_id" />
+                            <field domain="['&amp;', '|', ('product_id','=',product_id),'&amp;', ('product_tmpl_id.product_variant_ids','=',product_id),('product_id','=',False), ('type', '=', 'normal')]" name="bom_id" />
                         </group>
                         <group>
                             <field name="product_qty" />
