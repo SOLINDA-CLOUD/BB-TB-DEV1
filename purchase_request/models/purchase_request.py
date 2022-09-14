@@ -240,7 +240,7 @@ class PurchaseRequest(models.Model):
     @api.model
     def create(self, vals):
         if vals.get("name", _("New")) == _("New"):
-            vals["name"] = self.env['ir.sequence'].next_by_code('purchase.request.seq')
+            vals["name"] = self.env['ir.sequence'].next_by_code('purchase.request.seq') or _('New')
         request = super(PurchaseRequest, self).create(vals)
         if vals.get("assigned_to"):
             partner_id = self._get_partner_id(request)
