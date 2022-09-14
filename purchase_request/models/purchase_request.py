@@ -58,6 +58,7 @@ class PurchaseRequest(models.Model):
         required=True,
         default=lambda self: _("New"),
         tracking=True,
+        readonly=True,
     )
     is_name_editable = fields.Boolean(
         default=lambda self: self.env.user.has_group("base.group_no_one"),
