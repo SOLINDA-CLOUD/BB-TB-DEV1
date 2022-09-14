@@ -16,11 +16,17 @@ class MrpProductionRequest(models.Model):
         return self.env.user
 
     name = fields.Char(
-        default="/",
         required=True,
+        default='New',
+        index=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
+
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env['ir.sequence'].next_by_code('mrp.production.request')
+        return super(MrpProductionRequest, self).create(vals)
+
     origin = fields.Char(
         string="Source Document", readonly=True, states={"draft": [("readonly", False)]}
     )
@@ -119,7 +125,7 @@ class MrpProductionRequest(models.Model):
     )
     product_qty = fields.Float(
         string="Required Quantity",
-        required=True,
+        required=False,
         track_visibility="onchange",
         digits="Product Unit of Measure",
         default=1.0,

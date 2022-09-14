@@ -16,6 +16,7 @@
     "installable": True,
     "depends": ["mrp"],
     "data": [
+        "views/sequence_data.xml",
         "security/mrp_production_request_security.xml",
         "security/ir.model.access.csv",
         # "data/mrp_production_request_sequence.xml",
