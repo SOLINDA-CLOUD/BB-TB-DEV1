@@ -27,8 +27,7 @@ class ReportBomStructure(models.AbstractModel):
         return operations
 
     def _get_sub_lines(self, bom, product_id, line_qty, line_id, level, child_bom_ids, unfolded):
-        data = self._get_bom(bom_id=bom.id, product_id=product_id,
-                             line_qty=line_qty, line_id=line_id, level=level)
+        data = self._get_bom(bom_id=bom.id, product_id=product_id, line_qty=line_qty, line_id=line_id, level=level)
         bom_lines = data['components']
         lines = []
         for bom_line in bom_lines:
@@ -46,13 +45,13 @@ class ReportBomStructure(models.AbstractModel):
             })
             if bom_line['child_bom'] and (unfolded or bom_line['child_bom'] in child_bom_ids):
                 line = self.env['mrp.bom.line'].browse(bom_line['line_id'])
-                lines += (self._get_sub_lines(line.child_bom_id, line.product_id.id,
-                          bom_line['prod_qty'], line, level + 1, child_bom_ids, unfolded))
+                lines += (self._get_sub_lines(line.child_bom_id, line.product_id.id, bom_line['prod_qty'], line, level + 1, child_bom_ids, unfolded))
         if data['operations']:
             lines.append({
                 'name': _('Operations'),
                 'type': 'operation',
                 'quantity': data['operations_time'],
+                'uom': _(''),
                 'bom_cost': data['operations_cost'],
                 'level': level,
             })
@@ -62,27 +61,28 @@ class ReportBomStructure(models.AbstractModel):
                         'name': operation['name'],
                         'type': 'operation',
                         'quantity': operation['duration_expected'],
+                        'uom': _(''),
                         'bom_cost': operation['total'],
                         'level': level + 1,
                     })
         if data['byproducts']:
-            lines.append({
-                'name': _('Byproducts'),
-                'type': 'byproduct',
-                'uom': False,
-                'quantity': data['byproducts_total'],
-                'bom_cost': data['byproducts_cost'],
-                'level': level,
-            })
-            for byproduct in data['byproducts']:
-                if unfolded or 'byproduct-' + str(bom.id) in child_bom_ids:
-                    lines.append({
-                        'name': byproduct['product_name'],
-                        'type': 'byproduct',
-                        'quantity': byproduct['product_qty'],
-                        'uom': byproduct['product_uom'],
-                        'prod_cost': byproduct['product_cost'],
-                        'bom_cost': byproduct['bom_cost'],
-                        'level': level + 1,
-                    })
+                lines.append({
+                    'name': _('Byproducts'),
+                    'type': 'byproduct',
+                    'uom': False,
+                    'quantity': data['byproducts_total'],
+                    'bom_cost': data['byproducts_cost'],
+                    'level': level,
+                })
+                for byproduct in data['byproducts']:
+                    if unfolded or 'byproduct-' + str(bom.id) in child_bom_ids:
+                        lines.append({
+                            'name': byproduct['product_name'],
+                            'type': 'byproduct',
+                            'quantity': byproduct['product_qty'],
+                            'uom': byproduct['product_uom'],
+                            'prod_cost': byproduct['product_cost'],
+                            'bom_cost': byproduct['bom_cost'],
+                            'level': level + 1,
+                        })
         return lines
