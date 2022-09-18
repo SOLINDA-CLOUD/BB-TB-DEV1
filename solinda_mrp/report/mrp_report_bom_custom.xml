@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="template_id" name="template_name" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <xpath expr="//t/tr/td[@class='text-right']/span" position="replace">
+            <t t-if="l['type'] == 'operation'" t-esc="l['quantity']"/>
+            <t t-if="l['type'] in ['bom', 'byproduct']" t-esc="l['quantity']" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
+        </xpath>
+    </template>
+
+</odoo>
