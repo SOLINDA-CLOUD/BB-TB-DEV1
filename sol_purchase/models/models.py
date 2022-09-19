@@ -2,6 +2,13 @@
 
 from odoo import models, fields, api
 
+class PatternAlteration(models.Model):
+    _name = 'pattern.alteration'
+    _description = 'Link Purchase Request and Pattern Alteration'
+
+    parent_purchase_id = fields.Many2one('purchase.request', string='Request')
+    pattern_id = fields.Many2one('purchase.request', string='Pattern Alteration')
+    user_id = fields.Many2one('res.users', string='User Pattern Alteration')
 
 class PurchaseRequestLine(models.Model):
     _inherit = 'purchase.request.line'
@@ -26,11 +33,57 @@ class PurchaseRequest(models.Model):
     notes = fields.Html(string='Fit Notes')
     date_start = fields.Date(string='Transaction Date')
 
+    purchase_pattern_ids = fields.One2many('pattern.alteration', 'parent_purchase_id', string='Order History')
+    revision_id = fields.Many2one('purchase.request', string='Purchase to Pattern Alteration')
+    purchase_revision_id = fields.Many2one('purchase.request', string='Pattern Alteration')
+    pattern_count = fields.Integer(string='Pattern', compute='_find_len')
+    revisied = fields.Boolean(string='Revisied')
+    rev = fields.Integer('Revision')
+
     @api.model
     def create(self, vals):
         res = super(PurchaseRequest, self).create(vals)
         res.name = self.env["ir.sequence"].next_by_code("purchase.request.seq")
         return res
+
+    def _find_len(self):
+        self.pattern_count = len(self.purchase_pattern_ids.ids)
+
+    def create_pattern_alteration(self):
+        # new_name = self.name[0: self.name.index(' - PTR ')] if self.revisied else self.name
+        pattern = self.copy({
+            # 'name': "%s - PTR %s"%(new_name,self.rev + 1),
+            # 'rev': self.rev + 1,
+            # 'revision_id' : self.id,
+            # 'revisied': True
+        })
+        uid_id = self.env.user.id
+        self.env['pattern.alteration'].create({
+            'pattern_id': pattern.id,
+            'user_id': uid_id,
+            'parent_purchase_id': self.ids[0],
+        })
+        pattern.name = self.name + ' - PTR ' + str(len(self.purchase_pattern_ids.ids))
+        
+        action = self.env.ref('purchase_request.purchase_request_form_action').read()[0]
+        if pattern:
+            action['views'] = [(self.env.ref('purchase_request.view_purchase_request_form').id, 'form')]
+            action['res_id'] = pattern.ids[0]
+        else:
+            action = {'type': 'ir.action.act_window_close'}
+        return action
+    
+    def view_pattern_alteration(self):
+        action = self.env.ref('purchase_request.purchase_request_form_action').read()[0]
+        purchase_pattern_ids = self.mapped('purchase_pattern_ids.pattern_id')
+        if len(purchase_pattern_ids) > 1: 
+            action['domain'] = [('id', 'in', purchase_pattern_ids.ids)]
+        elif purchase_pattern_ids:
+            action['views'] = [
+                (self.env.ref('purchase_request.view_purchase_request_form').id, 'form')
+            ]
+            action['res_id'] = purchase_pattern_ids.id
+        return action
 
 class RequestDetail(models.Model):
     _name = 'request.detail'
