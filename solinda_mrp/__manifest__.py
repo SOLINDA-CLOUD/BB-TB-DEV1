@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "sol_purchase",
+    'name': "solinda_mrp",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -20,15 +20,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'purchase_request', 'purchase', 'stock'],
+    'depends': ['base','mrp'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
-        'security/pattern_security.xml',
-        'views/views.xml',
-        # 'views/templates.xml',
-        'views/sequence_data.xml',
+        # 'security/ir.model.access.csv',
+        'views/mrp_routing_views.xml',
+        'views/mrp_bom_views.xml',
+        'report/mrp_report_bom_custom.xml',
+        # 'report/mrp_report_views_main_custom.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
