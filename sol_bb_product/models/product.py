@@ -7,7 +7,7 @@ class ProductProduct(models.Model):
     collection_product = fields.Many2one('product.collections', string='Collection')
     launch_date = fields.Date(string='Launch Date')
     class_product = fields.Selection([('normal', 'Normal'),('sale','Sale')], string='Class')
-    default_code = fields.Char(string='Internal Reference', related='product_tmpl_id.default_code')
+    default_code = fields.Char(string='Internal Reference')
 
 class ProductCollections(models.Model):
     _name = 'product.collections'
