@@ -4,7 +4,46 @@ from odoo.exceptions import ValidationError
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
+    name = fields.Char(
+        required=True,
+        default='New',
+        index=True,
+        readonly=True,
+        string='Trans No.'
+    )
+
+    trans_date = fields.Datetime(
+        string='Transaction Date',
+        default=fields.Datetime.now,
+        index=True,
+        required=True,
+        readonly=True,
+        )
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env['ir.sequence'].next_by_code('mrp.bom')
+        return super(MrpBom, self).create(vals)
+    
     over_packaging = fields.Float(string='Over & Packaging')
+    customer = fields.Many2one(comodel_name='res.partner', string='Customer')
+    color = fields.Many2one(comodel_name='dpt.color', string='Color')
+    categ_id = fields.Many2one('product.category', related='product_tmpl_id.categ_id', string='Group', store=True)
+    retail_price = fields.Float(related='product_tmpl_id.list_price', string='Retail Price')
+    landed_cost = fields.Float(string='Landed Cost')
+    landed_quoted = fields.Float(string='Landed Quoted')
+
+class MrpBomLine(models.Model):
+    _inherit = 'mrp.bom.line'
+
+    color = fields.Many2one(comodel_name='dpt.color', string='Color')
+    sizes = fields.Many2one(comodel_name='sizes', string='Sizes')
+    ratio = fields.Float(string='Ratio')
+
+class Sizes(models.Model):
+    _name = 'sizes'
+    _description = 'Sizes'
+
+    name = fields.Char(string='Name')
 
 class DptColor(models.Model):
     _name = 'dpt.color'

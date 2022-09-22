@@ -7,8 +7,11 @@
       <field name="arch" type="xml">
         <field name='workcenter_id' position="after">
           <field name="fabric_id" />
+          <field name="color_id" />
           <field name="hk" />
           <field name="qty" />
+          <field name="shrinkage" />
+          <field name="shkg" />
         </field>
         <xpath expr="//field[@name='time_mode']" position="attributes">
           <attribute name="invisible">1</attribute>
@@ -31,6 +34,8 @@
           <field name="fabric_id" />
           <field name="hk" />
           <field name="qty" />
+          <field name="shrinkage" />
+          <field name="shkg" />
         </field>
         <xpath expr="//group/group/field[@name='time_mode']" position="attributes">
           <attribute name="invisible">1</attribute>

@@ -25,10 +25,11 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        "views/sequence_data.xml",
         'views/mrp_routing_views.xml',
         'views/mrp_bom_views.xml',
-        'report/mrp_report_bom_custom.xml',
-        # 'report/mrp_report_views_main_custom.xml',
+        'report/action_report.xml',
+        'report/costing_product.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
