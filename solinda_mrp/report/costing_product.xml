@@ -170,7 +170,7 @@
                             <tbody>
                                 <tr>
                                     <td style="width: 10%; border: 1px solid black;">Services</td>
-                                    <td style="width: 18%; text-align: center; border: 1px solid black;">Description</td>
+                                    <td style="width: 18%; text-align: center; border: 1px solid black;">Fabric</td>
                                     <td style="width: 18%; text-align: center; border: 1px solid black;">DPT</td>
                                     <td style="width: 10%; text-align: center; border: 1px solid black;">Qty</td>
                                     <td style="width: 12.5%; text-align: center; border: 1px solid black;">Price</td>

@@ -28,6 +28,8 @@
         "views/sequence_data.xml",
         'views/mrp_routing_views.xml',
         'views/mrp_bom_views.xml',
+        'views/mrp_production_views.xml',
+        'views/mrp_workorder_views.xml',
         'report/action_report.xml',
         'report/costing_product.xml',
     ],

@@ -3,10 +3,20 @@ from odoo import api, fields, models
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    order_id = fields.Many2one(
-        comodel_name='purchase.order',
-        string='PO'
-    )
-    partner_id = fields.Many2one(
-        string='Supplier', related='order_id.partner_id', default="Office")
-    # price = fields.Float(string='Price', related='order_id.amount_total')
+    trans_date = fields.Datetime(
+        string='Transaction Date',
+        default=fields.Datetime.now,
+        index=True,
+        required=True,
+        readonly=True,
+        )
+
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env['ir.sequence'].next_by_code('mrp.production')
+        return super(MrpProduction, self).create(vals)
+
+    customer = fields.Many2one(related='bom_id.customer', string='Customer')
+    retail_price = fields.Float(related='bom_id.retail_price', string='Retail Price')
+    sales_order_id = fields.Many2one(comodel_name='sale.order', string='SO No.')
+    po_no = fields.Char(string='PO No.')
