@@ -44,7 +44,9 @@ class MrpWorkorder(models.Model):
             })
         if self.state == 'progress':
             return True
+        
         start_date = datetime.now()
+
         if not self.supplier:
             raise ValidationError("Please Input Supplier first!")
 
@@ -56,6 +58,10 @@ class MrpWorkorder(models.Model):
             'partner_id': self.supplier.id,
             'state': 'purchase',
         })
+        
+        if not self.workcenter_id.product_service_id:
+            raise ValidationError("Product Service in this Workcenter hasn't been set")
+        
         self.env['purchase.order.line'].create({
             'product_id': self.workcenter_id.product_service_id.id,
             'product_qty': self.qty_producing,
