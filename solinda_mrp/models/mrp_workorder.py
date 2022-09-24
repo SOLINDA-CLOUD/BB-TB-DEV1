@@ -57,8 +57,9 @@ class MrpWorkorder(models.Model):
         po = self.env['purchase.order'].create({
             'partner_id': self.supplier.id,
             'state': 'purchase',
+            'date_approve': start_date,
         })
-        
+
         if not self.workcenter_id.product_service_id:
             raise ValidationError("Product Service in this Workcenter hasn't been set")
         
