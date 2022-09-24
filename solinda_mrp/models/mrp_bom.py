@@ -28,7 +28,7 @@ class MrpBom(models.Model):
     over_packaging = fields.Float(string='Over & Packaging', default=0.00)
     customer = fields.Many2one(comodel_name='res.partner', string='Customer')
     color = fields.Many2one(comodel_name='dpt.color', string='Color')
-    categ_id = fields.Many2one('product.category', related='product_tmpl_id.categ_id', string='Group', store=True)
+    categ_id = fields.Many2one('product.category', related='product_tmpl_id.categ_id', string='Group')
     retail_price = fields.Float(related='product_tmpl_id.list_price', string='Retail Price')
     landed_cost = fields.Float(string='Landed Cost')
     landed_quoted = fields.Float(string='Landed Quoted')

@@ -16,7 +16,7 @@ class MrpProduction(models.Model):
         vals['name'] = self.env['ir.sequence'].next_by_code('mrp.production')
         return super(MrpProduction, self).create(vals)
 
-    customer = fields.Many2one(related='bom_id.customer', string='Customer')
-    retail_price = fields.Float(related='bom_id.retail_price', string='Retail Price')
+    customer = fields.Many2one(related='bom_id.customer', string='Customer', store=True)
+    retail_price = fields.Float(related='bom_id.retail_price', string='Retail Price', store=True)
     sales_order_id = fields.Many2one(comodel_name='sale.order', string='SO No.')
     po_no = fields.Char(string='PO No.')
