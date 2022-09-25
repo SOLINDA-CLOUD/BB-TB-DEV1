@@ -58,8 +58,8 @@
             <field name='pattern_count' widget="statinfo" string='Pattern Alteration'/>
           </button>
         </xpath>
-        <xpath expr="//notebook//page[2]" position="after">
-          <page string="Custom Pattern" invisible="1">
+        <xpath expr="//notebook//page[1]" position="after">
+          <page string="Custom Pattern" attrs="{'invisible': [('state', 'not in', ('approved','done'))]}">
             <field name="purchase_custom_ids">
               <tree editable="bottom">
                 <field name="print_color_id" />
