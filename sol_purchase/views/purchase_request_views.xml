@@ -12,10 +12,23 @@
         <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='product_id']" position="after">
           <field name="image" widget="image" class="oe_avatar"/>
         </xpath>
-        <xpath expr="//group/field[@name='origin']" position="before">
-          <field name="style_name" />
-          <field name="department" />
+        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='date_required']" position="after">
+          <field name="department"/>
           <field name="sub_department" />
+        </xpath>
+        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='estimated_cost']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='company_id']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='purchase_qty']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='purchase_state']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//group/field[@name='origin']" position="before">
           <field name="request_detail_id" attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
         </xpath>
         <xpath expr="//field[@name='origin']" position="attributes">
@@ -35,6 +48,7 @@
         <xpath expr="//button[@name='button_rejected']" position="attributes">
           <attribute name="invisible">1</attribute> 
         </xpath>
+
 
         <xpath expr="//button[@name='button_approved']" position="after">
           <button name="create_pattern_alteration" type="object" string="Pattern Alteration" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('draft','to_approve'))]}"/>

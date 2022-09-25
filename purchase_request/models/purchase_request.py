@@ -109,7 +109,7 @@ class PurchaseRequest(models.Model):
     product_id = fields.Many2one(
         comodel_name="product.product",
         related="line_ids.product_id",
-        string="Product",
+        string="Style Name",
         readonly=True,
     )
     state = fields.Selection(

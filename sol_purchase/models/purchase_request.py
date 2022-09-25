@@ -26,7 +26,6 @@ class PurchaseRequestLine(models.Model):
 class PurchaseRequest(models.Model):
     _inherit = 'purchase.request'
 
-    style_name = fields.Char(string='Style Name')
     department = fields.Char(string='Department')
     sub_department = fields.Char(string='Sub Department')
     request_detail_id = fields.Many2one(string='Original Sample', comodel_name='request.detail', ondelete='cascade')
