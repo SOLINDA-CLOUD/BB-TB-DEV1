@@ -22,7 +22,7 @@
         <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='company_id']" position="attributes">
           <attribute name="invisible">1</attribute>
         </xpath>
-        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='purchase_qty']" position="attributes">
+        <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='purchased_qty']" position="attributes">
           <attribute name="invisible">1</attribute>
         </xpath>
         <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='purchase_state']" position="attributes">
