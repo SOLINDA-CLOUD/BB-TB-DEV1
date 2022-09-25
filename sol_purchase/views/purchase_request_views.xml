@@ -51,7 +51,7 @@
 
 
         <xpath expr="//button[@name='button_approved']" position="after">
-          <button name="create_pattern_alteration" type="object" string="Pattern Alteration" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('draft','to_approve'))]}"/>
+          <button name="create_pattern_alteration" type="object" string="Pattern Alteration" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('approved'))]}"/>
         </xpath>
         <xpath expr="//div[@class='oe_button_box']" position="inside">
           <button type="object" name="view_pattern_alteration" class="oe_stat_button" icon="fa-align-justify" attrs="{'invisible': [('pattern_count', '=', 0)]}">
