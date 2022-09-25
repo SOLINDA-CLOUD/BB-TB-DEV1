@@ -58,6 +58,27 @@
             <field name='pattern_count' widget="statinfo" string='Pattern Alteration'/>
           </button>
         </xpath>
+        <xpath expr="//notebook//page[2]" position="after">
+          <page string="Custom Pattern" invisible="1">
+            <field name="purchase_custom_ids">
+              <tree editable="bottom">
+                <field name="print_color_id" />
+                <field name="pattern_marker" />
+                <field name="model_ptr"/>
+                <field name="alt_cmnt" />
+              </tree>
+              <form>
+                <group>
+                  <field name="print_color_id" />
+                  <field name="pattern_marker" />
+                  <field name="alt_cmnt" />
+                  <field name="model_ptr"/>
+                  <field name="alt_cmnt" />
+                </group>
+              </form>
+            </field>
+          </page>
+        </xpath>
         <xpath expr="//button[@name='button_draft']" position="attributes">
             <attribute name="groups">sol_purchase.group_cancel_set_draft</attribute>
         </xpath>

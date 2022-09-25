@@ -10,6 +10,17 @@ class PatternAlteration(models.Model):
     pattern_id = fields.Many2one('purchase.request', string='Pattern Alteration')
     user_id = fields.Many2one('res.users', string='User Pattern Alteration')
 
+class CustomPattern(models.Model):
+    _name = 'custom.pattern'
+    _description = 'Custom Pattern'
+
+    # name = fields.Char('Print/Color')
+    parent_custom_id = fields.Many2one('purchase.request', string='custom')
+    print_color_id = fields.Char(string='Print/Color')
+    pattern_marker = fields.Char('Pattern Marker')
+    alt_cmnt = fields.Html('Alteration Comment')
+    model_ptr = fields.Char('Model')
+
 class PurchaseRequestLine(models.Model):
     _inherit = 'purchase.request.line'
 
@@ -32,6 +43,7 @@ class PurchaseRequest(models.Model):
     notes = fields.Html(string='Fit Notes')
     date_start = fields.Date(string='Transaction Date')
 
+    purchase_custom_ids = fields.One2many('custom.pattern', 'parent_custom_id', string='Custom', copy=True)
     purchase_pattern_ids = fields.One2many('pattern.alteration', 'parent_purchase_id', string='Order History')
     revision_id = fields.Many2one('purchase.request', string='Purchase to Pattern Alteration')
     purchase_revision_id = fields.Many2one('purchase.request', string='Pattern Alteration')
