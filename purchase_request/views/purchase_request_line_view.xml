@@ -7,7 +7,7 @@
         <field name="model">purchase.request.line</field>
         <field name="arch" type="xml">
             <tree
-                name="Purchase Request Lines"
+                name="Sample Development Lines"
                 create="false"
                 decoration-muted="cancelled == True"
                 decoration-info="request_state in ('draft', 'to_approve')"

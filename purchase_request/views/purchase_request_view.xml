@@ -54,7 +54,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,to_approve,approved,done,rejected"
+                        statusbar_visible="draft,to_approve,approved,done"
                         statusbar_colors='{"approved":"blue"}'
                     />
                 </header>
@@ -389,14 +389,14 @@
     />
     <menuitem
         id="parent_menu_purchase_request"
-        name="Purchase Requests"
+        name="Sample Development"
         sequence="22"
         web_icon="purchase_request,static/description/icon.png"
         groups="group_purchase_request_user,group_purchase_request_manager"
     />
     <menuitem
         id="menu_purchase_request"
-        name="Purchase Requests"
+        name="Sample Development"
         parent="parent_menu_purchase_request"
         groups="group_purchase_request_user,group_purchase_request_manager"
     />
