@@ -14,6 +14,8 @@ class PurchaseRequestLine(models.Model):
     _inherit = 'purchase.request.line'
 
     image = fields.Image(string='Fabric Swatch')
+    department = fields.Char(string='Department')
+    sub_department = fields.Char(string='Sub Department')
 
     @api.onchange('product_id')
     def _onchange_image(self):
@@ -26,8 +28,6 @@ class PurchaseRequestLine(models.Model):
 class PurchaseRequest(models.Model):
     _inherit = 'purchase.request'
 
-    department = fields.Char(string='Department')
-    sub_department = fields.Char(string='Sub Department')
     request_detail_id = fields.Many2one(string='Original Sample', comodel_name='request.detail', ondelete='cascade')
     notes = fields.Html(string='Fit Notes')
     date_start = fields.Date(string='Transaction Date')
