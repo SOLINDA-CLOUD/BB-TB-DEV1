@@ -29,6 +29,7 @@
           <attribute name="invisible">1</attribute>
         </xpath>
         <xpath expr="//group/field[@name='origin']" position="before">
+          <field name="test" invisible="1"/>
           <field name="request_detail_id" attrs="{'readonly': [('state', 'not in', ('draft'))]}"/>
         </xpath>
         <xpath expr="//field[@name='origin']" position="attributes">
@@ -59,7 +60,7 @@
           </button>
         </xpath>
         <xpath expr="//notebook//page[1]" position="after">
-          <page string="Custom Pattern" attrs="{'invisible': [('state', 'not in', ('approved','done'))]}">
+          <page string="Custom Pattern" attrs="{'invisible': [('test', '=', False)]}">
             <field name="purchase_custom_ids">
               <tree editable="bottom">
                 <field name="print_color_id" />

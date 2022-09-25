@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import _, models, fields, api
 
 class PatternAlteration(models.Model):
     _name = 'pattern.alteration'
@@ -48,8 +48,7 @@ class PurchaseRequest(models.Model):
     revision_id = fields.Many2one('purchase.request', string='Purchase to Pattern Alteration')
     purchase_revision_id = fields.Many2one('purchase.request', string='Pattern Alteration')
     pattern_count = fields.Integer(string='Pattern', compute='_find_len')
-    revisied = fields.Boolean(string='Revisied')
-    rev = fields.Integer('Revision')
+    test = fields.Boolean(string="Test", default=False)
 
     @api.model
     def create(self, vals):
@@ -61,13 +60,7 @@ class PurchaseRequest(models.Model):
         self.pattern_count = len(self.purchase_pattern_ids.ids)
 
     def create_pattern_alteration(self):
-        # new_name = self.name[0: self.name.index(' - PTR ')] if self.revisied else self.name
-        pattern = self.copy({
-            # 'name': "%s - PTR %s"%(new_name,self.rev + 1),
-            # 'rev': self.rev + 1,
-            # 'revision_id' : self.id,
-            # 'revisied': True
-        })
+        pattern = self.copy()
         uid_id = self.env.user.id
         self.env['pattern.alteration'].create({
             'pattern_id': pattern.id,
@@ -75,15 +68,21 @@ class PurchaseRequest(models.Model):
             'parent_purchase_id': self.ids[0],
         })
         pattern.name = self.name + ' - PTR ' + str(len(self.purchase_pattern_ids.ids))
+        pattern.test = True
+        self.env['custom.pattern'].create({
+            'parent_custom_id': self.ids[0],
+        })
+        return {
+            "name": _("Pattern Alteration"),
+            "type": "ir.actions.act_window",
+            "res_model": "purchase.request",
+            "views": [
+                (self.env.ref("purchase_request.view_purchase_request_form").id, "form"),
+            ],
+            "target": "current",
+            "res_id": pattern.id,
+        }
         
-        action = self.env.ref('purchase_request.purchase_request_form_action').read()[0]
-        if pattern:
-            action['views'] = [(self.env.ref('purchase_request.view_purchase_request_form').id, 'form')]
-            action['res_id'] = pattern.ids[0]
-        else:
-            action = {'type': 'ir.action.act_window_close'}
-        return action
-    
     def view_pattern_alteration(self):
         action = self.env.ref('purchase_request.purchase_request_form_action').read()[0]
         purchase_pattern_ids = self.mapped('purchase_pattern_ids.pattern_id')
