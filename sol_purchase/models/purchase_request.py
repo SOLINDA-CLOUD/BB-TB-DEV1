@@ -21,12 +21,58 @@ class CustomPattern(models.Model):
     alt_cmnt = fields.Html('Alteration Comment')
     model_ptr = fields.Char('Model')
 
+class FabricLining(models.Model):
+    _name = 'fabric.lining'
+    _description = 'Fabric Lining'
+
+    fabric_lining_id = fields.Many2one('purchase.request', string='fabric lining ids')
+    fabric = fields.Char('Fabric')
+    lining = fields.Char('Lining')
+    color = fields.Char('Color')
+
+class LabelHardware(models.Model):
+    _name = 'label.hardware'
+    _description = 'Label Hardware'
+
+    label_hardware_id = fields.Many2one('purchase.request', string='label hardware ids')
+    description = fields.Char('Description')
+    color = fields.Char('Color')
+    qty_label = fields.Float('Qty')
+
+class LabelDress(models.Model):
+    _name = 'label.dress'
+    _description = 'Label Dress'
+
+    label_dress_id = fields.Many2one('purchase.request', string='label dress ids')
+    brand = fields.Char('Brand')
+    image = fields.Image('Label Pict')
+    comment = fields.Char('Comment')
+
+class ProductionSummary(models.Model):
+    _name = 'production.summary'
+    _description = 'Production Summary'
+
+    prod_summ_id = fields.Many2one('purchase.request', string='prod summ ids')
+    summary = fields.Char('Summary')
+    description = fields.Char('Description')
+
+class RequestDetail(models.Model):
+    _name = 'request.detail'
+    _description = 'Request Detail'
+
+    name = fields.Char(string='Original Sample')
+    sample_size = fields.Char(string='Sample Size')
+    approved_size = fields.Char(string='Sample In Approved Size')
+    sample_in_size = fields.Char(string='Please Make Sample In Size')
+
 class PurchaseRequestLine(models.Model):
     _inherit = 'purchase.request.line'
 
     image = fields.Image(string='Fabric Swatch')
     department = fields.Char(string='Department')
     sub_department = fields.Char(string='Sub Department')
+    fabric = fields.Char(string='Fabric')
+    lining = fields.Char(string='Lining')
 
     @api.onchange('product_id')
     def _onchange_image(self):
@@ -39,16 +85,35 @@ class PurchaseRequestLine(models.Model):
 class PurchaseRequest(models.Model):
     _inherit = 'purchase.request'
 
+    ### SAMPLE DEVELOPMENT ###
     request_detail_id = fields.Many2one(string='Original Sample', comodel_name='request.detail', ondelete='cascade')
     notes = fields.Html(string='Fit Notes')
     date_start = fields.Date(string='Transaction Date')
 
+    ### PATTERN ALTERATION ###
     purchase_custom_ids = fields.One2many('custom.pattern', 'parent_custom_id', string='Custom', copy=True)
     purchase_pattern_ids = fields.One2many('pattern.alteration', 'parent_purchase_id', string='Order History')
     revision_id = fields.Many2one('purchase.request', string='Purchase to Pattern Alteration')
     purchase_revision_id = fields.Many2one('purchase.request', string='Pattern Alteration')
     pattern_count = fields.Integer(string='Pattern', compute='_find_len')
     test = fields.Boolean(string="Test", default=False)
+
+    ### PENDING ORDER ###
+    status_of_sample = fields.Char(string='Status of Sample')
+    ordering_date = fields.Date(string='Ordering Date')
+    delivery_date = fields.Date(string='Delivery Date')
+    thread_type = fields.Char(string='Thread Type')
+    thread_color = fields.Char(string='Thread Color')
+    hanging_tape = fields.Char(string='Hanging Tape')
+
+    seams = fields.Html(string='Seams')
+    grading_intructions = fields.Html(string='Grading Intructions')
+    fit_changes = fields.Html(string='Fit Changes')
+
+    fabric_lining_ids = fields.One2many('fabric.lining', 'fabric_lining_id', string='fabric lining id')
+    label_hardware_ids = fields.One2many('label.hardware', 'label_hardware_id', string='label hardware id')
+    label_dress_ids = fields.One2many('label.dress', 'label_dress_id', string='label dress id')
+    prod_summ_ids = fields.One2many('production.summary', 'prod_summ_id', string='prod summ id')
 
     def button_to_pattern(self):
         return self.write({'state':'rejected'})
@@ -98,14 +163,5 @@ class PurchaseRequest(models.Model):
             action['res_id'] = purchase_pattern_ids.id
         return action
 
-class RequestDetail(models.Model):
-    _name = 'request.detail'
-    _description = 'Request Detail'
 
-    name = fields.Char(string='Original Sample')
-    sample_size = fields.Char(string='Sample Size')
-    approved_size = fields.Char(string='Sample In Approved Size')
-    sample_in_size = fields.Char(string='Please Make Sample In Size')
-    fabric = fields.Char(string='Fabric')
-    lining = fields.Char(string='Lining')
     
