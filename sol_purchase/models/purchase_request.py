@@ -50,6 +50,9 @@ class PurchaseRequest(models.Model):
     pattern_count = fields.Integer(string='Pattern', compute='_find_len')
     test = fields.Boolean(string="Test", default=False)
 
+    def button_to_pattern(self):
+        return self.write({'state':'rejected'})
+
     @api.model
     def create(self, vals):
         res = super(PurchaseRequest, self).create(vals)

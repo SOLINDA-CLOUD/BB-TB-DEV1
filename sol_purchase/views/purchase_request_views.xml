@@ -43,16 +43,25 @@
         </xpath>
         <xpath expr="//notebook/page/group" position="after">
           <group string="Fit Notes">
-            <field name="notes" nolabel="1" placeholder="Comments ....."/>
+            <field name="notes" nolabel="1" placeholder="Comments ....." attrs="{'invisible': [('state', 'in', ('done'))]}"/>
           </group>
         </xpath>
         <xpath expr="//button[@name='button_rejected']" position="attributes">
           <attribute name="invisible">1</attribute> 
         </xpath>
 
-
+        <xpath expr="//header" position="inside">
+          <button 
+            name="button_to_pattern" 
+            states="approved"
+            type="object" 
+            string="Pattern Alteration"
+            class="oe_highlight"
+            attrs="{'invisible': [('state', 'not in', ('approved'))]}"
+          />
+        </xpath>
         <xpath expr="//button[@name='button_approved']" position="after">
-          <button name="create_pattern_alteration" type="object" string="Pattern Alteration" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('approved'))]}"/>
+          <button name="create_pattern_alteration" type="object" string="Create Pattern Alteration" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('rejected'))]}"/>
         </xpath>
         <xpath expr="//div[@class='oe_button_box']" position="inside">
           <button type="object" name="view_pattern_alteration" class="oe_stat_button" icon="fa-align-justify" attrs="{'invisible': [('pattern_count', '=', 0)]}">

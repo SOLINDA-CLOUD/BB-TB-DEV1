@@ -7,8 +7,8 @@ from odoo.exceptions import UserError
 _STATES = [
     ("draft", "Draft"),
     ("to_approve", "To be approved"),
-    ("approved", "Pattern Alteration"),
-    ("rejected", "Rejected"),
+    ("approved", "Approved"),
+    ("rejected", "Pattern Alteration"),
     ("done", "Pending Order"),
 ]
 

@@ -54,7 +54,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,to_approve,approved,done"
+                        statusbar_visible="draft,to_approve,approved,rejected,done"
                         statusbar_colors='{"approved":"blue"}'
                     />
                 </header>
@@ -239,7 +239,7 @@
             <tree
                 decoration-bf="message_needaction==True"
                 decoration-info="state in ('draft','to_approve')"
-                decoration-muted="state in ('rejected')"
+                decoration-primary="state in ('rejected')"
                 name="Purchase Request"
             >
                 <field name="message_needaction" invisible="1" />
@@ -261,7 +261,7 @@
                     decoration-success="state in ('done', 'approved')"
                     decoration-muted="state == 'draft'"
                     decoration-warning="state == 'to_approve'"
-                    decoration-danger="state == 'rejected'"
+                    decoration-primary="state == 'rejected'"
                 />
             </tree>
         </field>
