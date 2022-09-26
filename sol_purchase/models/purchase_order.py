@@ -17,7 +17,7 @@ from odoo import _, fields, api, models
 class PurchaseOrder(models.Model):
   _inherit = 'purchase.order'
 
-  attention = fields.Many2one('res.users', string='Attention')
+  attention = fields.Char(string='Attention')
   supplier = fields.Char('Supplier')
   sub_suplier = fields.Char('Sub Suplier')
   brand = fields.Char('Brand')

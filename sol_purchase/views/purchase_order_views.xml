@@ -21,7 +21,7 @@
           <field name="prod_comm" />
           <field name="image" widget="image" class="oe_avatar"/>
         </xpath>
-        <xpath expr="//notebook//page[2]" position="after">
+        <xpath expr="//notebook//page[1]" position="after">
           <page string="Additional Information">
             <group>
               <field name="attention" />
