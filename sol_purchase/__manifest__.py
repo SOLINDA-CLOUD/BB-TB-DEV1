@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         'security/pattern_security.xml',
         'views/purchase_request_views.xml',
+        'views/purchase_order_views.xml',
         # 'views/templates.xml',
         'views/sequence_data.xml',
     ],

@@ -100,8 +100,8 @@ class PurchaseRequest(models.Model):
 
     ### PENDING ORDER ###
     status_of_sample = fields.Char(string='Status of Sample')
-    ordering_date = fields.Date(string='Ordering Date')
-    delivery_date = fields.Date(string='Delivery Date')
+    ordering_date = fields.Date(string='Delivery Start')
+    delivery_date = fields.Date(string='')
     thread_type = fields.Char(string='Thread Type')
     thread_color = fields.Char(string='Thread Color')
     hanging_tape = fields.Char(string='Hanging Tape')
