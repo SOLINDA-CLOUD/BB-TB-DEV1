@@ -23,6 +23,9 @@ class PurchaseOrder(models.Model):
   brand = fields.Char('Brand')
   buyer = fields.Char('Buyer')
 
+  supplier_po = fields.Char('Supplier PO')
+  po = fields.Char('PO')
+
 class PurchaseOrderLine(models.Model):
   _inherit = 'purchase.order.line'
 
@@ -35,4 +38,3 @@ class PurchaseOrderLine(models.Model):
   # type = fields.Many2one(comodel_name='type.model', string='Type')
   type = fields.Char(string='Type')
   prod_comm = fields.Html(string='Production Comment')
-

@@ -21,6 +21,20 @@
           <field name="prod_comm" />
           <field name="image" widget="image" class="oe_avatar"/>
         </xpath>
+        <xpath expr="//notebook//page[2]" position="after">
+          <group>
+            <field name="attention" />
+            <field name="supplier" /> 
+            <field name="sub_suplier" />
+            <field name="brand" />
+            <field name="buyer" />
+          </group>
+        </xpath>
+        <xpath expr="//field[@name='picking_type_id']" position="before">
+          <field name="supplier_po" />
+          <field name="po" />
+        </xpath>
+
       </field>
     </record>
   
