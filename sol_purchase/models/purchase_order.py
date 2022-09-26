@@ -26,6 +26,12 @@ class PurchaseOrder(models.Model):
   supplier_po = fields.Char('Supplier PO')
   po = fields.Char('PO')
 
+  @api.model
+  def create(self, vals):
+      res = super(PurchaseOrder, self).create(vals)
+      res.name = self.env["ir.sequence"].next_by_code("purchase.order.seq")
+      return res
+
 class PurchaseOrderLine(models.Model):
   _inherit = 'purchase.order.line'
 
