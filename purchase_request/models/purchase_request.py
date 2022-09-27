@@ -8,8 +8,8 @@ _STATES = [
     ("draft", "Draft"),
     ("to_approve", "To be approved"),
     ("approved", "Approved"),
-    ("rejected", "Rejected"),
-    ("done", "Done"),
+    ("rejected", "Pattern Alteration"),
+    ("done", "Pending Order"),
 ]
 
 
@@ -55,7 +55,6 @@ class PurchaseRequest(models.Model):
 
     name = fields.Char(
         string="Transaction No",
-        required=True,
         default=lambda self: _("New"),
         tracking=True,
         readonly=True,
@@ -109,7 +108,7 @@ class PurchaseRequest(models.Model):
     product_id = fields.Many2one(
         comodel_name="product.product",
         related="line_ids.product_id",
-        string="Product",
+        string="Style Name",
         readonly=True,
     )
     state = fields.Selection(

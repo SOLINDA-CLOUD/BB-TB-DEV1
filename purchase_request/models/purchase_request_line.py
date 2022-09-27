@@ -173,7 +173,7 @@ class PurchaseRequestLine(models.Model):
     currency_id = fields.Many2one(related="company_id.currency_id", readonly=True)
     product_id = fields.Many2one(
         comodel_name="product.product",
-        string="Product",
+        string="Style Name",
         domain=[("purchase_ok", "=", True)],
         tracking=True,
     )

@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 {
-    "name": "Purchase Request",
+    "name": "Sample Development",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "version": "15.0.1.1.0",
     "summary": "Use this module to have notification of requirements of "

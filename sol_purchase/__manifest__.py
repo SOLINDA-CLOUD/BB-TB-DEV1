@@ -20,13 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'purchase_request', 'purchase', 'stock'],
+    'depends': ['base', 'purchase_request', 'purchase', 'stock', 'purchase_stock'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'security/pattern_security.xml',
-        'views/views.xml',
+        'views/purchase_request_views.xml',
+        'views/purchase_order_views.xml',
+        'report/report_action.xml',
+        'report/report_sample_development.xml',
         # 'views/templates.xml',
         'views/sequence_data.xml',
     ],

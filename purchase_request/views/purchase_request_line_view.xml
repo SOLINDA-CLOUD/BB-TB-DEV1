@@ -7,7 +7,7 @@
         <field name="model">purchase.request.line</field>
         <field name="arch" type="xml">
             <tree
-                name="Purchase Request Lines"
+                name="Sample Development Lines"
                 create="false"
                 decoration-muted="cancelled == True"
                 decoration-info="request_state in ('draft', 'to_approve')"
@@ -367,7 +367,7 @@
         />
     </record>
     <record id="purchase_request_line_form_action" model="ir.actions.act_window">
-        <field name="name">Purchase Request Lines</field>
+        <field name="name">Sample Development Lines</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">purchase.request.line</field>
         <field name="view_mode">tree,form</field>
@@ -489,7 +489,7 @@
                     <field name="invoice_lines" attrs="{'readonly': True}" />
                     <separator string="Stock Moves" />
                     <field name="move_ids" attrs="{'readonly': True}" />
-                    <separator string="Purchase Request Lines" />
+                    <separator string="Sample Development Lines" />
                     <field name="purchase_request_lines" attrs="{'readonly': True}" />
                 </sheet>
             </form>
