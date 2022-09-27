@@ -151,7 +151,7 @@
                   <td style="width: 49.4543%; height: 36px;">
                     <br/>
                     <br/>
-                    <img t-if="order.product_id.image_1920" t-att-src="image_data_uri(order.product_id.image_1920)" style="max-height: 125px;"/>
+                    <img t-if="order.product_id.image_1920" t-att-src="image_data_uri(order.product_id.image_1920)" style="max-height:420px; max-width:425px;/>
                   </td>
                 </tr>
               </t>
