@@ -145,10 +145,13 @@
               <t t-foreach="doc.line_ids" t-as="order">
                 <tr style="height: 36px;">
                   <td style="width: 50.5457%; height: 36px;">
+                    <br/>
                     <t t-esc="doc.notes"/>
                   </td>
                   <td style="width: 49.4543%; height: 36px;">
-                    <span t-field="order.image" t-field-options='{"widget": "image"}' style="width:90px; height:90px;"/> 
+                    <br/>
+                    <br/>
+                    <img t-if="order.product_id.image_1920" t-att-src="image_data_uri(order.product_id.image_1920)" style="max-height: 125px;"/>
                   </td>
                 </tr>
               </t>
