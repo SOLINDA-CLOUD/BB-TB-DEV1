@@ -38,10 +38,6 @@
             <xpath expr="//button[@name='button_pending']" position="attributes">
                 <attribute name="attrs">{'invisible':True}</attribute>
             </xpath>
-
-            <xpath expr="//button[@name='button_finish']" position="attributes">
-                <attribute name="string">Receive PO</attribute>
-            </xpath>
         </field>
     </record>
 
