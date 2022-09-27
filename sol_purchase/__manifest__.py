@@ -28,6 +28,8 @@
         'security/pattern_security.xml',
         'views/purchase_request_views.xml',
         'views/purchase_order_views.xml',
+        'report/report_action.xml',
+        'report/report_sample_development.xml',
         # 'views/templates.xml',
         'views/sequence_data.xml',
     ],
