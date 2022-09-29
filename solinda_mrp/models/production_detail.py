@@ -72,7 +72,6 @@ class ProductionDetail(models.Model):
         string="User",
         required=True,
         track_visibility="onchange",
-        readonly=True,
     )
     date_planned_start = fields.Datetime(
         'Scheduled Date', copy=False, default=_get_default_date_planned_start,

@@ -20,22 +20,24 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group name="main" string="Main">
-                        <field name="name" />
-                        <field name="customer" />
-                        <field name="trans_date" />
-                        <field name="bom_id" required="1" />
-                        <field name="product_tmpl_id" />
-                        <field name="image" />
-                    </group>
-                    <group name="production" string="Detail Production">
-                        <field name="date_planned_start" />
-                        <field name="user_id" />
-                        <field name="product_qty" />
-                        <field name="sales_order_id" />
-                        <field name="po_no" />
-                        <field name="retail_price" />
-                        <field name="fit_notes" />
+                    <group>
+                        <group name="main" string="Main">
+                            <field name="name" />
+                            <field name="customer" />
+                            <field name="trans_date" />
+                            <field name="bom_id" required="1" />
+                            <field name="product_tmpl_id" />
+                            <field name="image" widget="image" class="container"/>
+                        </group>
+                        <group name="production" string="Detail Production">
+                            <field name="date_planned_start" />
+                            <field name="user_id" />
+                            <field name="product_qty" />
+                            <field name="sales_order_id" />
+                            <field name="po_no" />
+                            <field name="retail_price" />
+                            <field name="fit_notes" />
+                        </group>
                     </group>
                     <notebook>
                         <page name="variant" string="Variant">
@@ -66,6 +68,6 @@
         <field name="context">{}</field>
     </record>
 
-    <menuitem id="production_detail_menu" name="Production Detail" action="production_detail_action" groups="base.group_system" sequence="50"/>
+    <menuitem id="production_detail_menu" name="Production Detail" action="production_detail_action" parent="mrp.menu_mrp_manufacturing" groups="base.group_system" sequence="50"/>
 
 </odoo>
