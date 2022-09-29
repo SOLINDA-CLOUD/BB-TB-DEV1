@@ -5,7 +5,7 @@
         <field name="name">production.detail.view.tree</field>
         <field name="model">production.detail</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree>
                 <field name="name" />
                 <field name="trans_date" />
                 <field name="product_tmpl_id" />
@@ -18,14 +18,54 @@
         <field name="name">production.detail.view.form</field>
         <field name="model">production.detail</field>
         <field name="arch" type="xml">
-            <form string="">
+            <form>
                 <sheet>
-                    <group>
-
+                    <group name="main" string="Main">
+                        <field name="name" />
+                        <field name="customer" />
+                        <field name="trans_date" />
+                        <field name="bom_id" required="1" />
+                        <field name="product_tmpl_id" />
+                        <field name="image" />
                     </group>
+                    <group name="production" string="Detail Production">
+                        <field name="date_planned_start" />
+                        <field name="user_id" />
+                        <field name="product_qty" />
+                        <field name="sales_order_id" />
+                        <field name="po_no" />
+                        <field name="retail_price" />
+                        <field name="fit_notes" />
+                    </group>
+                    <notebook>
+                        <page name="variant" string="Variant">
+                            <field name="production_detail_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="variant_qty" />
+                                </tree>
+                                <form>
+                                    <field name="product_id" />
+                                    <field name="variant_qty" />
+                                    <field name="production_id" />
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
+
+    <record id="production_detail_action" model="ir.actions.act_window">
+        <field name="name">Production Detail</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">production.detail</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="production_detail_menu" name="Production Detail" action="production_detail_action" groups="base.group_system" sequence="50"/>
 
 </odoo>

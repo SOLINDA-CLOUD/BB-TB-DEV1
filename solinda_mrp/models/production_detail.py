@@ -70,7 +70,6 @@ class ProductionDetail(models.Model):
     user_id = fields.Many2one(
         comodel_name="res.users",
         string="User",
-        default=lambda self: self._get_default_requested_by(),
         required=True,
         track_visibility="onchange",
         readonly=True,
