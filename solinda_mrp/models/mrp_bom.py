@@ -1,5 +1,5 @@
 from email.policy import default
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 class MrpBom(models.Model):

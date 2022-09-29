@@ -6,3 +6,4 @@ from . import mrp_production
 from . import mrp_workorder
 from . import mrp_workcenter
 from . import stock_move
+from . import production_detail
