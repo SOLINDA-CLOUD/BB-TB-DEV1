@@ -2,13 +2,7 @@ from odoo import models, fields, api
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-
-    account_analytic_id = fields.Many2one(
-        comodel_name='account.analytic.account',
-        store=True,
-        string='Analytic Account',
-        readonly=False)
-
+    
     @api.depends('partner_id', 'date')
     def _compute_analytic_account_id(self):
         for order in self:
@@ -20,3 +14,10 @@ class StockPicking(models.Model):
                     company_id=order.company_id.id,
                 )
                 order.analytic_account_id = default_analytic_account.analytic_id
+
+    account_analytic_id = fields.Many2one(
+        comodel_name='account.analytic.account',
+        store=True,
+        string='Analytic Account',
+        readonly=False,
+        compute=_compute_analytic_account_id)
